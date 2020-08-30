@@ -6,9 +6,12 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+    - name: Check version changes
+      uses: EndBug/version-check@v1
+      id: check
     - name: Parse Changelog # Exit if changelog not found
       id: changelog
-      run: node ./scripts/changelog
+      uses: ./scripts/changelog
       with:
-        version: ${{ needs.check.outputs.version }}
+        version: ${{ steps.check.outputs.version }}
     - run: echo ${{ steps.changelog.output.version }}\n${{ steps.changelog.output.changes }}
