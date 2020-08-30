@@ -11,7 +11,7 @@ jobs:
       id: check
     - name: Parse Changelog # Exit if changelog not found
       id: changelog
-      uses: ./scripts/changelog
-      with:
-        version: ${{ steps.check.outputs.version }}
+      env:
+        INPUT_VERSION: ${{ needs.check.outputs.version }}
+      run: node ./scripts/changelog
     - run: echo ${{ steps.changelog.output.version }}\n${{ steps.changelog.output.changes }}
