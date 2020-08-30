@@ -14,4 +14,4 @@ jobs:
       env:
         INPUT_VERSION: ${{ needs.check.outputs.version }}
       run: node ./scripts/changelog
-    - run: echo ${{ steps.changelog.output.version }}\n${{ steps.changelog.output.changes }}
+    - run: echo ${{ steps.changelog.outputs.version }}\n${{ steps.changelog.outputs.changes }}
