@@ -1,0 +1,14 @@
+name: Changelog test
+on: push
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Parse Changelog # Exit if changelog not found
+      id: changelog
+      run: node ./scripts/changelog
+      with:
+        version: ${{ needs.check.outputs.version }}
+    - run: echo ${{ steps.changelog.output.version }}\n${{ steps.changelog.output.changes }}
